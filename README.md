@@ -1,11 +1,11 @@
 [![Docker Build](https://img.shields.io/docker/build/inwinstack/tgt-rbd-docker.svg)](https://hub.docker.com/r/inwinstack/tgt-rbd-docker/)
 # tgt-rbd-docker
-Put tgt daemon in container
+Using tgt daemon in container
 
 - Pull docker image
 
 ```shell
-docker pull minshenglin/tgt-rbd-docker
+docker pull inwinstack/tgt-rbd-docker
 ```
 
 - Check ceph.conf and ceph.client.admin.keyring in /etc/ceph
@@ -19,7 +19,7 @@ total 12
 -rw-------. 1 root root   0 Jan 15 05:55 tmp6OEnwT
 ```
 
-- Check RBD Pool is exists and rbd image has been crated
+- Check RBD Pool is exists and rbd image has been created
 
 ```
 [root@mon-1 ~]# ceph osd pool ls
@@ -42,5 +42,5 @@ iscsi-rbd
 
 ```shell
 docker run -d --net=host --name tgt -v /home/vagrant/tgt-docker/tgt/:/etc/tgt/ \ 
--v /etc/ceph:/etc/ceph -p 3260:3260 minshenglin/tgt-rbd-docker 
+-v /etc/ceph:/etc/ceph -p 3260:3260 inwinstack/tgt-rbd-docker 
 ```
