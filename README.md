@@ -1,3 +1,4 @@
+[![Docker Build](https://img.shields.io/docker/build/inwinstack/tgt-rbd-docker.svg)](https://hub.docker.com/r/inwinstack/tgt-rbd-docker/)
 # tgt-rbd-docker
 Put tgt daemon in container
 
