@@ -1,6 +1,9 @@
 [![Docker Build](https://img.shields.io/docker/build/inwinstack/tgt-rbd-docker.svg)](https://hub.docker.com/r/inwinstack/tgt-rbd-docker/)
+
 # tgt-rbd-docker
 Using tgt daemon in container
+
+## Setup
 
 - Pull docker image
 
@@ -43,4 +46,29 @@ iscsi-rbd
 ```shell
 docker run -d --net=host --name tgt -v /home/vagrant/tgt-docker/tgt/:/etc/tgt/ \ 
 -v /etc/ceph:/etc/ceph -p 3260:3260 inwinstack/tgt-rbd-docker 
+```
+
+- Add restart argument if you need to auto restart this container
+
+```shell
+docker run -d --net=host --restart always --name tgt -v /home/vagrant/tgt-docker/tgt/:/etc/tgt/ \ 
+-v /etc/ceph:/etc/ceph -p 3260:3260 inwinstack/tgt-rbd-docker 
+```
+
+## SELinux
+
+- if SELinux is enabled, tgt config may not be mapped in container
+
+```
+[root@ceph-node ceph-conf]# getenforce 1
+Enforcing
+[root@ceph-node ceph-conf]# docker run -d --net=host --name tgt -v /root/ceph-conf/tgt/:/etc/tgt/ -v /etc/ceph:/etc/ceph -p 3260:3260 inwinstack/tgt-rbd-docker
+988fe869346b1743f6245dbd5d89053d6943235f3505895881c91c4423c0c43a
+[root@ceph-node ceph-conf]# docker logs tgt
+tgtadm: failed to send request hdr to tgt daemon, Transport endpoint is not connected
+Config file /etc/tgt/targets.conf not found. Exiting...
+tgtd: iser_ib_init(3434) Failed to initialize RDMA; load kernel modules?
+can't adjust oom-killer's pardon /proc/self/oom_score_adj, Permission denied
+tgtd: work_timer_start(150) use signal based scheduler
+tgtd: bs_init(387) use signalfd notification
 ```
