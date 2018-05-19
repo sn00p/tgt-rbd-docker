@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER Minsheng Lin <minsheng.l@inwinstack.com>
+MAINTAINER Artem Silenkov <artem.slenkov@gmail.com>
 
 USER root
 
